@@ -9,3 +9,21 @@ export const contactMessages = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getMessages = async (req, res, next) => {
+  try {
+    const allMessanges = await ContactModel.find({});
+    res.status(200).json(allMessanges);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deleteMessages = async (req, res, next) => {
+  try {
+    await ContactModel.findByIdAndDelete(req.body.id);
+    res.status(200).json("Messages has been deleted.");
+  } catch (err) {
+    next(err);
+  }
+};
